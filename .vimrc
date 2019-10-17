@@ -2,7 +2,6 @@ set nocompatible
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'VundleVim/Vundle.vim'
 Plug 'dense-analysis/ale'
 Plug 'itchyny/lightline.vim'
 Plug 'maximbaz/lightline-ale'
@@ -16,7 +15,7 @@ Plug 'tpope/vim-commentary'
 Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang' }
 Plug 'octol/vim-cpp-enhanced-highlight'
 Plug 'bkad/CamelCaseMotion'
-Plug 'airblade/vim-gitgutter'
+Plug 'mhinz/vim-signify'
 Plug 'tyrannicaltoucan/vim-quantum'
 Plug 'iamcco/markdown-preview.nvim'
 
@@ -24,8 +23,14 @@ call plug#end()
 
 syntax on
 
+" vcs gutter
+let g:signify_sign_delete            = '-'
+let g:signify_sign_delete_first_line = '-'
+
 let g:ale_sign_error = '⤫'
-let g:ale_sign_warning = '⚠' " Enable integration with airline.
+let g:ale_sign_warning = '⚠' 
+
+" Enable integration with airline.
 let g:lightline = {}
 
 let g:lightline.component_expand = {
@@ -93,6 +98,7 @@ set expandtab
 set showcmd
 set cursorline
 set wildmenu
+set wildmode=list
 set lazyredraw
 set showmatch
 set incsearch
