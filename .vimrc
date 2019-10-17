@@ -18,7 +18,6 @@ Plugin 'tpope/vim-repeat'
 Plugin 'tpope/vim-commentary'
 Plugin 'ycm-core/YouCompleteMe'
 Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'vim-syntastic/syntastic'
 Plugin 'bkad/CamelCaseMotion'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'tyrannicaltoucan/vim-quantum'
@@ -28,6 +27,10 @@ call vundle#end()
 filetype plugin indent on
 
 syntax on
+let g:ale_sign_error = '⤫'
+let g:ale_sign_warning = '⚠' " Enable integration with airline.
+let g:airline#extensions#ale#enabled = 1
+
 " colorscheme
 
 set background=dark
@@ -35,11 +38,6 @@ set termguicolors
 let g:quantum_black=1
 let g:airline_theme='quantum'
 colorscheme quantum
-
-"colorscheme rigel
-
-"let g:rigel_airline = 1
-"let g:airline_theme = 'rigel'
 
 " camelcasemotion
 
@@ -49,15 +47,6 @@ map <silent> e <Plug>CamelCaseMotion_e
 sunmap w
 sunmap b
 sunmap e
-
-" syntastic
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_cpp_check_header = 1
-let g:syntastic_cpp_compiler = "g++"
-let g:syntastic_cpp_compiler_options = "-std=c++11 -Wall -Wextra -Wpedantic"
 
 " youcompleteme
 
@@ -73,7 +62,6 @@ let g:cpp_concepts_highlight = 1
 let g:python_highlight_all = 1
 
 " indentLine config
-" let g:indentLine_setColors = 0
 let g:indentLine_char = '┆'
 
 " JS config
