@@ -1,42 +1,57 @@
 set nocompatible
-filetype off
 
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin('~/.vim/plugged')
 
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'tomasiser/vim-code-dark'
-Plugin 'vim-airline/vim-airline'
-Plugin 'vim-airline/vim-airline-themes'
-Plugin 'Rigellute/rigel'
-Plugin 'pangloss/vim-javascript'
-Plugin 'mxw/vim-jsx'
-Plugin 'Yggdroot/indentLine'
-Plugin 'vim-python/python-syntax'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-repeat'
-Plugin 'tpope/vim-commentary'
-Plugin 'ycm-core/YouCompleteMe'
-Plugin 'octol/vim-cpp-enhanced-highlight'
-Plugin 'bkad/CamelCaseMotion'
-Plugin 'airblade/vim-gitgutter'
-Plugin 'tyrannicaltoucan/vim-quantum'
-Plugin 'dense-analysis/ale'
+Plug 'VundleVim/Vundle.vim'
+Plug 'dense-analysis/ale'
+Plug 'itchyny/lightline.vim'
+Plug 'maximbaz/lightline-ale'
+Plug 'pangloss/vim-javascript'
+Plug 'mxw/vim-jsx'
+Plug 'Yggdroot/indentLine'
+Plug 'vim-python/python-syntax'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-commentary'
+Plug 'ycm-core/YouCompleteMe', { 'do': './install.py --clang-completer --system-libclang' }
+Plug 'octol/vim-cpp-enhanced-highlight'
+Plug 'bkad/CamelCaseMotion'
+Plug 'airblade/vim-gitgutter'
+Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'iamcco/markdown-preview.nvim'
 
-call vundle#end()
-filetype plugin indent on
+call plug#end()
 
 syntax on
+
 let g:ale_sign_error = '⤫'
 let g:ale_sign_warning = '⚠' " Enable integration with airline.
-let g:airline#extensions#ale#enabled = 1
+let g:lightline = {}
+
+let g:lightline.component_expand = {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ } 
+
+let g:lightline.component_type = {
+      \     'linter_checking': 'left',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'left',
+      \ }
+
+let g:lightline.active = { 'right': [[ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_ok' ]] }
 
 " colorscheme
 
-set background=dark
-set termguicolors
 let g:quantum_black=1
-let g:airline_theme='quantum'
+
+let g:lightline = {
+      \ 'colorscheme': 'quantum',
+      \ }
+
 colorscheme quantum
 
 " camelcasemotion
@@ -85,6 +100,7 @@ set hlsearch
 set splitbelow
 set splitright
 set clipboard=unnamed
+set background=dark
 set termguicolors
 
 inoremap jj <esc>
