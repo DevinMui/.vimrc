@@ -262,3 +262,5 @@ colorscheme quantum
 
 " esc rebind
 inoremap jj <esc>
+
+:au VimLeave * set guicursor=a:hor100-blinkon500-blinkoff500-blinkwait500
