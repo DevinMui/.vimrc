@@ -2,6 +2,7 @@ set nocompatible
 
 call plug#begin('~/.vim/plugged')
 
+Plug 'dense-analysis/ale'
 Plug 'itchyny/lightline.vim'
 Plug 'pangloss/vim-javascript'
 Plug 'Yggdroot/indentLine'
@@ -24,18 +25,16 @@ call plug#end()
 
 syntax on
 
+" ale
+let g:ale_sign_error = '>>'
+let g:ale_sign_warning = '⚠'
+let g:ale_linters = {'cpp': ['clang']}
+
 " vcs gutter
 let g:signify_sign_delete            = '-'
 let g:signify_sign_delete_first_line = '-'
 
-" colorscheme
-
-let g:quantum_black=1
-
-colorscheme quantum
-
 " camelcasemotion
-
 map <silent> w <Plug>CamelCaseMotion_w
 map <silent> b <Plug>CamelCaseMotion_b
 map <silent> e <Plug>CamelCaseMotion_e
@@ -82,23 +81,15 @@ set clipboard=unnamed
 set background=dark
 set termguicolors
 
-" coc setup
+" coc configuration
 " if hidden is not set, TextEdit might fail.
 set hidden
-
-" Some servers have issues with backup files, see #649
 set nobackup
 set nowritebackup
-
-" Better display for messages
 set cmdheight=2
-
-" You will have bad experience for diagnostic messages when it's default 4000.
 set updatetime=300
-
 " don't give |ins-completion-menu| messages.
 set shortmess+=c
-
 " always show signcolumns
 set signcolumn=yes
 
@@ -260,6 +251,14 @@ endfunction
 \ }
 
 autocmd User CocDiagnosticChange call lightline#update()
+
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+
+" coc configuration end
+
+" colorscheme
+let g:quantum_black=1
+colorscheme quantum
 
 " esc rebind
 inoremap jj <esc>
